@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vazin Reviews</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b0b0b;
+  color: white;
+}
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 30px 18px 60px;
+}
+
+.hero {
+  text-align: center;
+  padding: 45px 20px;
+}
+
+.cat {
+  font-size: 55px;
+  margin-bottom: 10px;
+}
+
+.logo {
+  font-size: 36px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.subtitle {
+  color: #aaa;
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.rating-box {
+  text-align: center;
+  margin: 20px 0 35px;
+  padding: 25px;
+  background: #151515;
+  border-radius: 20px;
+}
+
+.big-rating {
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.stars {
+  color: #fff;
+  font-size: 24px;
+  letter-spacing: 4px;
+  margin: 8px 0;
+}
+
+.review-count {
+  color: #999;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 14px;
+  background: white;
+  color: black;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.button:hover {
+  opacity: 0.85;
+}
+
+.section-title {
+  text-align: center;
+  margin: 40px 0 20px;
+  font-size: 22px;
+}
+
+.review {
+  background: #151515;
+  border: 1px solid #262626;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+
+.review-name {
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.review-stars {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.review-text {
+  color: #ddd;
+  line-height: 1.6;
+}
+
+.review-date {
+  color: #777;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.form-box {
+  display: none;
+  background: #151515;
+  border-radius: 20px;
+  padding: 22px;
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 7px;
+  color: #ddd;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #0b0b0b;
+  color: white;
+  font-size: 15px;
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.star-select {
+  display: flex;
+  gap: 8px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.star-select span {
+  color: #444;
+}
+
+.star-select span.active {
+  color: white;
+}
+
+footer {
+  text-align: center;
+  color: #666;
+  margin-top: 50px;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="hero">
+
+    <div class="cat">🐈‍⬛</div>
+
+    <div class="logo">
+      VAZIN
+    </div>
+
+    <div class="subtitle">
+      CUSTOMER REVIEWS
+    </div>
+
+    <p class="subtitle">
+      ขอบคุณลูกค้าทุกคนที่ไว้วางใจและฝากรีวิวให้ร้านนะคะ ♡
+    </p>
+
+  </div>
+
+
+  <div class="rating-box">
+
+    <div class="big-rating">
+      5.0
+    </div>
+
+    <div class="stars">
+      ★★★★★
+    </div>
+
+    <div class="review-count">
+      <span id="reviewCount">0</span> Reviews
+    </div>
+
+  </div>
+
+
+  <button class="button" onclick="showForm()">
+    ♡ WRITE A REVIEW ♡
+  </button>
+
+
+  <div class="form-box" id="reviewForm">
+
+    <h2>เขียนรีวิวให้ร้าน ♡</h2>
+
+    <label>ชื่อ / ชื่อในเกม</label>
+
+    <input
+      type="text"
+      id="name"
+      placeholder="พิมพ์ชื่อของคุณ"
+    >
+
+
+    <label>ให้คะแนนร้าน</label>
+
+    <div class="star-select" id="starSelect">
+
+      <span onclick="selectStar(1)">★</span>
+      <span onclick="selectStar(2)">★</span>
+      <span onclick="selectStar(3)">★</span>
+      <span onclick="selectStar(4)">★</span>
+      <span onclick="selectStar(5)">★</span>
+
+    </div>
+
+
+    <label>รีวิวของคุณ</label>
+
+    <textarea
+      id="reviewText"
+      placeholder="เขียนรีวิวของคุณได้เลย..."
+    ></textarea>
+
+
+    <button class="button" onclick="submitReview()">
+      ส่งรีวิว ♡
+    </button>
+
+  </div>
+
+
+  <h2 class="section-title">
+    CUSTOMER REVIEWS
+  </h2>
+
+
+  <div id="reviews">
+
+    <div class="review">
+
+      <div class="review-name">
+        Vazin Customer
+      </div>
+
+      <div class="review-stars">
+        ★★★★★
+      </div>
+
+      <div class="review-text">
+        ขอบคุณสำหรับบริการดี ๆ นะคะ ♡
+      </div>
+
+      <div class="review-date">
+        Example Review
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <footer>
+    ♡ Thank you for supporting Vazin ♡
+  </footer>
+
+</div>
+
+
+<script>
+
+let selectedStar = 0;
+
+function showForm() {
+
+  const form = document.getElementById("reviewForm");
+
+  form.style.display = "block";
+
+  form.scrollIntoView({
+    behavior: "smooth"
+  });
+
+}
+
+
+function selectStar(number) {
+
+  selectedStar = number;
+
+  const stars =
+    document.querySelectorAll("#starSelect span");
+
+  stars.forEach((star, index) => {
+
+    if (index < number) {
+      star.classList.add("active");
+    } else {
+      star.classList.remove("active");
+    }
+
+  });
+
+}
+
+
+function submitReview() {
+
+  const name =
+    document.getElementById("name").value.trim();
+
+  const text =
+    document.getElementById("reviewText").value.trim();
+
+
+  if (!name) {
+
+    alert("กรุณาใส่ชื่อก่อนนะคะ");
+
+    return;
+
+  }
+
+
+  if (!selectedStar) {
+
+    alert("กรุณาเลือกคะแนนดาวค่ะ");
+
+    return;
+
+  }
+
+
+  if (!text) {
+
+    alert("กรุณาเขียนรีวิวก่อนค่ะ");
+
+    return;
+
+  }
+
+
+  const reviews =
+    JSON.parse(localStorage.getItem("vazinReviews") || "[]");
+
+
+  reviews.push({
+
+    name: name,
+
+    stars: selectedStar,
+
+    text: text,
+
+    date: new Date().toLocaleDateString("th-TH")
+
+  });
+
+
+  localStorage.setItem(
+    "vazinReviews",
+    JSON.stringify(reviews)
+  );
+
+
+  alert("ขอบคุณสำหรับรีวิวค่ะ ♡");
+
+
+  location.reload();
+
+}
+
+
+function loadReviews() {
+
+  const reviews =
+    JSON.parse(localStorage.getItem("vazinReviews") || "[]");
+
+
+  const container =
+    document.getElementById("reviews");
+
+
+  document.getElementById("reviewCount").innerText =
+    reviews.length;
+
+
+  reviews.reverse().forEach(review => {
+
+    const box =
+      document.createElement("div");
+
+    box.className = "review";
+
+
+    box.innerHTML = `
+
+      <div class="review-name">
+        ${review.name}
+      </div>
+
+      <div class="review-stars">
+        ${"★".repeat(review.stars)}
+      </div>
+
+      <div class="review-text">
+        ${review.text}
+      </div>
+
+      <div class="review-date">
+        ${review.date}
+      </div>
+
+    `;
+
+
+    container.prepend(box);
+
+  });
+
+}
+
+
+loadReviews();
+
+</script>
+
+</body>
+</html>
